@@ -1,8 +1,10 @@
 import random
+import re
 #cpf = input("Digite o CPF para verificação.")
+
 novo_cpf_final = ''
 gerador_confirmado = True
-gerar_cpf = []
+
 while gerador_confirmado:
     gerar_cpf = []
     qtd_cpf = 0
@@ -10,10 +12,17 @@ while gerador_confirmado:
         gerar_cpf.append(str(random.randrange(0,9)))
         i += 1
 
+    #cpf_final = cpf.replace('.','').replace(' ','').replace('-','')
     cpf_final = ''.join(gerar_cpf)
+
+    '''cpf_final = re.sub(
+        r'[^0,9]',
+        '',
+        cpf
+    )'''
+
     nove_digito = cpf_final[:9]
     dez_digito = cpf_final[:10]
-    verificacao = cpf_final[9:]
 
     contador_1 = 10
     contador_2 = 11
@@ -36,13 +45,13 @@ while gerador_confirmado:
         segundo_digito = 0
 
 
+    cpf_gerado_calculo = f'{nove_digito}{primeiro_digito}{segundo_digito}'
 
-    if primeiro_digito == int(verificacao[0]) and segundo_digito == int(verificacao[1]):
+    if cpf_final == cpf_gerado_calculo:
         print('CPF válido.')
         gerador_confirmado = False
-    
- 
 
+    
 
 for index in range(len(str(cpf_final))):
     if not cpf_final[index] in '0123456789':continue 
